@@ -21,16 +21,39 @@ int main(void) {
     // print a menu of choices for the user (refer to graphic)
     // get char from user and store in char variable c
     
-    char C = ' ';
-    menu(&C);
-    // printf("%c\n", C);
+    char input = ' ';
 
     int N;
-    N = getOdd();
+    // N = getOdd();
     // printf("%d\n", N);
 
-    C = '*';
-    printPlus(N, C);
+    char C = ' ';
+
+    int run = 1;
+    while (run) {
+        menu(&input);
+        // printf("input is: %c", input);
+        switch (input) {
+            case 'C':
+            case 'c':
+                C = getChar();
+                break;
+            case 'N': 
+            case 'n':
+                N = getOdd();
+                break;
+            case '1':
+                printPlus(N, C);
+                break;
+            case '2':
+                printX(N, C);
+                break;
+            case 'Q':
+            case 'q':
+                run = 0;
+        }
+        // system("clear");
+    }
 
 }
 
@@ -41,7 +64,7 @@ int main(void) {
 * a single pass-by-reference char that takes the user entry
 */ 
 void menu(char *f) {
-    printf("MENU:\n");
+    printf("\nMENU:\n");
     printf("Enter/Change Character: \'C\' or \'c\'\n");
     printf("Enter/Change Number:    \'N\' or \'n\'\n");
     printf("Print Plus (+) Figure:  \'1\'\n");
@@ -80,6 +103,12 @@ getOdd(void) {
 }
 
 void printX(int N, char C) {
+    if (N < 3) {
+        printf("\nPlease initialize N\n\n");
+        return;
+    }
+    printf("\n");
+
     int row = 0;
     int col = 0;
     for (row = 0; row < N; row++) {
@@ -98,8 +127,16 @@ void printX(int N, char C) {
 }
 
 void printPlus(int N, char C) {
+    if (N < 3) {
+        printf("\nPlease initialize N\n\n");
+        return;
+    }
+    printf("\n");
+
     int row = 0;
     int col = 0;
+
+    // printf("N: %d | C : %c", N, C);
     for (row = 0; row < N; row++) {
         // printf("row: %d", row);
         col = 0;
