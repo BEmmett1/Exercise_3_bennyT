@@ -1,0 +1,395 @@
+Script started on Sat 27 Feb 2021 10:08:22 PM EST
+[?1034hbash-4.2$ uname -a
+Linux zeus-2 3.10.0-1160.11.1.el7.x86_64 #1 SMP Fri Dec 18 16:34:56 UTC 2020 x86_64 x86_64 x86_64 GNU/Linux
+bash-4.2$ ls
+lab3_bthomp5_210.c  Lab3_Sample_Input.txt  lab3_typescript_bthomp5_210	Makefile  test_run.out
+bash-4.2$ cat lab3_bthomp5_210.c [K
+/* Benny Thompson G01282798
+ * CS 262, Lab Section 210
+ * Lab 3
+ */
+
+#include<stdio.h>
+
+char *f;
+void menu(char *f);
+void printX(int N, char C);
+void printPlus(int N, char C);
+int getChar(void);
+int getOdd(void);
+
+
+
+/* main method */
+int main(void) {
+    char input;
+    int N;
+    char C;
+    int run;
+    
+    input = ' ';
+    C = ' ';
+    run = 1;
+
+    while (run) {
+        menu(&input);
+        switch (input) {
+            case 'C':
+            case 'c':
+                C = getChar();
+                break;
+            case 'N': 
+            case 'n':
+                N = getOdd();
+                break;
+            case '1':
+                printPlus(N, C);
+                break;
+            case '2':
+                printX(N, C);
+                break;
+            case 'Q':
+            case 'q':
+                run = 0;
+        }
+    }
+    return 0;
+}
+
+/* 5 different functions
+
+ 1. Print Menu: prompts user to enter a choice and retrieves that choice
+* return value must be void
+* a single pass-by-reference char that takes the user entry
+*/ 
+void menu(char *f) {
+    char userInput;
+    printf("\nMENU:\n");
+    printf("Enter/Change Character: \'C\' or \'c\'\n");
+    printf("Enter/Change Number:    \'N\' or \'n\'\n");
+    printf("Print Plus (+) Figure:  \'1\'\n");
+    printf("Print * Figure:         \'2\'\n");
+    printf("Quit Program:           \'Q\' or \'q\'\n");
+    
+    userInput = getChar();
+    *f = userInput;
+
+    return;
+}
+
+/* 2. getChar: prompts user to enter a single character. return value is char */
+int getChar(void) {
+    char c;
+    printf("Enter char: ");
+    scanf(" %c", &c);
+    return c;
+}
+
+/* 3. giveOdd: prompts the user to enter odd number between 3 and 15 (inclusive). If value is
+ outside range: prompt again. Value is to be stored in local variable N in main. return int */
+int getOdd(void) {
+    int num ;
+    int foundOdd;
+    num = 0;
+    foundOdd = 0;
+    
+    while (!foundOdd) {
+        printf("Please enter an odd number between 3 and 15 (inclusive):\n");
+        scanf("%d", &num);
+        if ((num >= 3 && num <= 15) && num % 2 != 0) {
+            foundOdd = 1;
+        }
+    }
+    return num;
+}
+
+void printX(int N, char C) {
+    int row;
+    int col;
+
+    if (N < 3) {
+        printf("\nPlease initialize N\n\n");
+        return;
+    }
+    printf("\n");
+
+    row = 0;
+    col = 0;
+    for (; row < N; row++) {
+        col = 0;
+        for (; col < N; col++) {
+            if (col == row) printf("%c",C);
+            else if (col == N-row-1) printf("%c",C);
+            else printf(" ");
+        }
+        printf("\n");
+    }
+    
+    return;
+}
+
+void printPlus(int N, char C) {
+    int row;
+    int col;
+
+    if (N < 3) {
+        printf("\nPlease initialize N\n\n");
+        return;
+    }
+    printf("\n");
+
+    row = 0;
+    col = 0;
+
+    for (row = 0; row < N; row++) {
+        col = 0;
+        for (; col < N; col++) {
+            if (col == N/2) printf("%c",C);
+            else if (row == N/2) printf("%c",C);
+            else printf(" ");
+        }
+        printf("\n");
+    }
+    
+    return;
+}bash-4.2$ c[Kmake clean
+rm lab3_bthomp5_210
+rm: cannot remove ‘lab3_bthomp5_210’: No such file or directory
+make: *** [clean] Error 1
+bash-4.2$ ls
+lab3_bthomp5_210.c  Lab3_Sample_Input.txt  lab3_typescript_bthomp5_210	Makefile  test_run.out
+bash-4.2$ make
+gcc -g -Wall -std=c89 -pedantic-errors -o lab3_bthomp5_210 lab3_bthomp5_210.c -lm
+bash-4.2$ ls
+lab3_bthomp5_210  lab3_bthomp5_210.c  Lab3_Sample_Input.txt  lab3_typescript_bthomp5_210  Makefile  test_run.out
+bash-4.2$ lab3_bthomp5_210 >[K< Lab3_Sample_Input.txt 
+
+MENU:
+Enter/Change Character: 'C' or 'c'
+Enter/Change Number:    'N' or 'n'
+Print Plus (+) Figure:  '1'
+Print * Figure:         '2'
+Quit Program:           'Q' or 'q'
+Enter char: 
+MENU:
+Enter/Change Character: 'C' or 'c'
+Enter/Change Number:    'N' or 'n'
+Print Plus (+) Figure:  '1'
+Print * Figure:         '2'
+Quit Program:           'Q' or 'q'
+Enter char: 
+MENU:
+Enter/Change Character: 'C' or 'c'
+Enter/Change Number:    'N' or 'n'
+Print Plus (+) Figure:  '1'
+Print * Figure:         '2'
+Quit Program:           'Q' or 'q'
+Enter char: Please enter an odd number between 3 and 15 (inclusive):
+Please enter an odd number between 3 and 15 (inclusive):
+
+MENU:
+Enter/Change Character: 'C' or 'c'
+Enter/Change Number:    'N' or 'n'
+Print Plus (+) Figure:  '1'
+Print * Figure:         '2'
+Quit Program:           'Q' or 'q'
+Enter char: 
+MENU:
+Enter/Change Character: 'C' or 'c'
+Enter/Change Number:    'N' or 'n'
+Print Plus (+) Figure:  '1'
+Print * Figure:         '2'
+Quit Program:           'Q' or 'q'
+Enter char: 
+MENU:
+Enter/Change Character: 'C' or 'c'
+Enter/Change Number:    'N' or 'n'
+Print Plus (+) Figure:  '1'
+Print * Figure:         '2'
+Quit Program:           'Q' or 'q'
+Enter char: 
+MENU:
+Enter/Change Character: 'C' or 'c'
+Enter/Change Number:    'N' or 'n'
+Print Plus (+) Figure:  '1'
+Print * Figure:         '2'
+Quit Program:           'Q' or 'q'
+Enter char: 
+MENU:
+Enter/Change Character: 'C' or 'c'
+Enter/Change Number:    'N' or 'n'
+Print Plus (+) Figure:  '1'
+Print * Figure:         '2'
+Quit Program:           'Q' or 'q'
+Enter char: Enter char: 
+MENU:
+Enter/Change Character: 'C' or 'c'
+Enter/Change Number:    'N' or 'n'
+Print Plus (+) Figure:  '1'
+Print * Figure:         '2'
+Quit Program:           'Q' or 'q'
+Enter char: 
+MENU:
+Enter/Change Character: 'C' or 'c'
+Enter/Change Number:    'N' or 'n'
+Print Plus (+) Figure:  '1'
+Print * Figure:         '2'
+Quit Program:           'Q' or 'q'
+Enter char: 
+MENU:
+Enter/Change Character: 'C' or 'c'
+Enter/Change Number:    'N' or 'n'
+Print Plus (+) Figure:  '1'
+Print * Figure:         '2'
+Quit Program:           'Q' or 'q'
+Enter char: Please enter an odd number between 3 and 15 (inclusive):
+Please enter an odd number between 3 and 15 (inclusive):
+Please enter an odd number between 3 and 15 (inclusive):
+
+MENU:
+Enter/Change Character: 'C' or 'c'
+Enter/Change Number:    'N' or 'n'
+Print Plus (+) Figure:  '1'
+Print * Figure:         '2'
+Quit Program:           'Q' or 'q'
+Enter char: 
+MENU:
+Enter/Change Character: 'C' or 'c'
+Enter/Change Number:    'N' or 'n'
+Print Plus (+) Figure:  '1'
+Print * Figure:         '2'
+Quit Program:           'Q' or 'q'
+Enter char: 
+MENU:
+Enter/Change Character: 'C' or 'c'
+Enter/Change Number:    'N' or 'n'
+Print Plus (+) Figure:  '1'
+Print * Figure:         '2'
+Quit Program:           'Q' or 'q'
+Enter char: Please enter an odd number between 3 and 15 (inclusive):
+Please enter an odd number between 3 and 15 (inclusive):
+
+MENU:
+Enter/Change Character: 'C' or 'c'
+Enter/Change Number:    'N' or 'n'
+Print Plus (+) Figure:  '1'
+Print * Figure:         '2'
+Quit Program:           'Q' or 'q'
+Enter char: 
+MENU:
+Enter/Change Character: 'C' or 'c'
+Enter/Change Number:    'N' or 'n'
+Print Plus (+) Figure:  '1'
+Print * Figure:         '2'
+Quit Program:           'Q' or 'q'
+Enter char: 
+MENU:
+Enter/Change Character: 'C' or 'c'
+Enter/Change Number:    'N' or 'n'
+Print Plus (+) Figure:  '1'
+Print * Figure:         '2'
+Quit Program:           'Q' or 'q'
+Enter char: 
+MENU:
+Enter/Change Character: 'C' or 'c'
+Enter/Change Number:    'N' or 'n'
+Print Plus (+) Figure:  '1'
+Print * Figure:         '2'
+Quit Program:           'Q' or 'q'
+Enter char: 
+       $       
+       $       
+       $       
+       $       
+       $       
+       $       
+       $       
+$$$$$$$$$$$$$$$
+       $       
+       $       
+       $       
+       $       
+       $       
+       $       
+       $       
+
+MENU:
+Enter/Change Character: 'C' or 'c'
+Enter/Change Number:    'N' or 'n'
+Print Plus (+) Figure:  '1'
+Print * Figure:         '2'
+Quit Program:           'Q' or 'q'
+Enter char: 
+$             $
+ $           $ 
+  $         $  
+   $       $   
+    $     $    
+     $   $     
+      $ $      
+       $       
+      $ $      
+     $   $     
+    $     $    
+   $       $   
+  $         $  
+ $           $ 
+$             $
+
+MENU:
+Enter/Change Character: 'C' or 'c'
+Enter/Change Number:    'N' or 'n'
+Print Plus (+) Figure:  '1'
+Print * Figure:         '2'
+Quit Program:           'Q' or 'q'
+Enter char: Enter char: 
+MENU:
+Enter/Change Character: 'C' or 'c'
+Enter/Change Number:    'N' or 'n'
+Print Plus (+) Figure:  '1'
+Print * Figure:         '2'
+Quit Program:           'Q' or 'q'
+Enter char: Please enter an odd number between 3 and 15 (inclusive):
+
+MENU:
+Enter/Change Character: 'C' or 'c'
+Enter/Change Number:    'N' or 'n'
+Print Plus (+) Figure:  '1'
+Print * Figure:         '2'
+Quit Program:           'Q' or 'q'
+Enter char: 
+ n 
+nnn
+ n 
+
+MENU:
+Enter/Change Character: 'C' or 'c'
+Enter/Change Number:    'N' or 'n'
+Print Plus (+) Figure:  '1'
+Print * Figure:         '2'
+Quit Program:           'Q' or 'q'
+Enter char: 
+n n
+ n 
+n n
+
+MENU:
+Enter/Change Character: 'C' or 'c'
+Enter/Change Number:    'N' or 'n'
+Print Plus (+) Figure:  '1'
+Print * Figure:         '2'
+Quit Program:           'Q' or 'q'
+Enter char: 
+MENU:
+Enter/Change Character: 'C' or 'c'
+Enter/Change Number:    'N' or 'n'
+Print Plus (+) Figure:  '1'
+Print * Figure:         '2'
+Quit Program:           'Q' or 'q'
+Enter char: bash-4.2$ make clean
+rm lab3_bthomp5_210
+bash-4.2$ ls
+lab3_bthomp5_210.c  Lab3_Sample_Input.txt  lab3_typescript_bthomp5_210	Makefile  test_run.out
+bash-4.2$ exit
+
+Script done on Sat 27 Feb 2021 10:09:28 PM EST

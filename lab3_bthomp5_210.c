@@ -14,25 +14,19 @@ int getOdd(void);
 
 
 
-// main method
+/* main method */
 int main(void) {
-    // printf("Hello world\n");
-
-    // print a menu of choices for the user (refer to graphic)
-    // get char from user and store in char variable c
-    
-    char input = ' ';
-
+    char input;
     int N;
-    // N = getOdd();
-    // printf("%d\n", N);
+    char C;
+    int run;
+    
+    input = ' ';
+    C = ' ';
+    run = 1;
 
-    char C = ' ';
-
-    int run = 1;
     while (run) {
         menu(&input);
-        // printf("input is: %c", input);
         switch (input) {
             case 'C':
             case 'c':
@@ -52,45 +46,46 @@ int main(void) {
             case 'q':
                 run = 0;
         }
-        // system("clear");
     }
-
+    return 0;
 }
 
-// 5 different functions
+/* 5 different functions
 
-/* 1. Print Menu: prompts user to enter a choice and retrieves that choice
+ 1. Print Menu: prompts user to enter a choice and retrieves that choice
 * return value must be void
 * a single pass-by-reference char that takes the user entry
 */ 
 void menu(char *f) {
+    char userInput;
     printf("\nMENU:\n");
     printf("Enter/Change Character: \'C\' or \'c\'\n");
     printf("Enter/Change Number:    \'N\' or \'n\'\n");
     printf("Print Plus (+) Figure:  \'1\'\n");
     printf("Print * Figure:         \'2\'\n");
     printf("Quit Program:           \'Q\' or \'q\'\n");
-
-    char userInput;
+    
     userInput = getChar();
     *f = userInput;
 
     return;
 }
 
-// 2. getChar: prompts user to enter a single character. return value is char
-getChar(void) {
-    printf("Enter char: ");
+/* 2. getChar: prompts user to enter a single character. return value is char */
+int getChar(void) {
     char c;
+    printf("Enter char: ");
     scanf(" %c", &c);
     return c;
 }
 
-// 3. giveOdd: prompts the user to enter odd number between 3 and 15 (inclusive). If value is
-// outside range: prompt again. Value is to be stored in local variable N in main. return int
-getOdd(void) {
-    int num = 0;
-    int foundOdd = 0;
+/* 3. giveOdd: prompts the user to enter odd number between 3 and 15 (inclusive). If value is
+ outside range: prompt again. Value is to be stored in local variable N in main. return int */
+int getOdd(void) {
+    int num ;
+    int foundOdd;
+    num = 0;
+    foundOdd = 0;
     
     while (!foundOdd) {
         printf("Please enter an odd number between 3 and 15 (inclusive):\n");
@@ -103,19 +98,20 @@ getOdd(void) {
 }
 
 void printX(int N, char C) {
+    int row;
+    int col;
+
     if (N < 3) {
         printf("\nPlease initialize N\n\n");
         return;
     }
     printf("\n");
 
-    int row = 0;
-    int col = 0;
-    for (row = 0; row < N; row++) {
-        // printf("row: %d", row);
+    row = 0;
+    col = 0;
+    for (; row < N; row++) {
         col = 0;
-        for (col; col < N; col++) {
-            // printf("col: %d", col);
+        for (; col < N; col++) {
             if (col == row) printf("%c",C);
             else if (col == N-row-1) printf("%c",C);
             else printf(" ");
@@ -127,21 +123,21 @@ void printX(int N, char C) {
 }
 
 void printPlus(int N, char C) {
+    int row;
+    int col;
+
     if (N < 3) {
         printf("\nPlease initialize N\n\n");
         return;
     }
     printf("\n");
 
-    int row = 0;
-    int col = 0;
+    row = 0;
+    col = 0;
 
-    // printf("N: %d | C : %c", N, C);
     for (row = 0; row < N; row++) {
-        // printf("row: %d", row);
         col = 0;
-        for (col; col < N; col++) {
-            // printf("col: %d", col);
+        for (; col < N; col++) {
             if (col == N/2) printf("%c",C);
             else if (row == N/2) printf("%c",C);
             else printf(" ");
